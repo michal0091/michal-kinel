@@ -1,0 +1,5 @@
+project:
+  title: "mmk_cv"
+  type: website
+  output-dir: docs
+

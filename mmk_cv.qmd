@@ -1,0 +1,182 @@
+---
+title: ""
+format: 
+  html:
+    theme: custom.scss
+    embed-resources: true
+    page-layout: article
+execute:
+  echo: false
+  warning: false
+---
+
+
+::: columns
+::: {.column width="28%"}
+<center><a href='https://www.linkedin.com/in/michal-kinel/' target='_blank'> ![](https://avatars.githubusercontent.com/u/36136546?v=4){width="80%" style="border-radius: 50%;"}</center>
+
+</a>
+
+
+### Contact
+
+<span><a href='https://www.linkedin.com/in/michal-kinel/' target='_blank'><i class="fa-brands fa-linkedin fa-xl" style="color: #1d4f67;"></i></a> michal-kinel </span> <br><br>
+<span><a href='mailto:michal.kinel@gmail.com' target='_blank'><i class="fa-solid fa-envelope fa-xl" style="color: #1d4f67;"></i></a> michal.kinel@gmail.com </span> <br><br>
+<span><a href='https://wa.me/34634469309' target='_blank'><i class="fa-solid fa-mobile fa-xl" style="color: #1d4f67;"></i></a> +34 634 469 309 </span> <br><br>
+<span><a href='https://github.com/michal0091' target='_blank'><i class="fab fa-github fa-xl" style="color: #1d4f67;"></i></a> michal0091 </span>
+
+### Idiomas
+
+**Polaco:** Nativo <br> **Español:** Nativo <br> **Inglés:** Alto <br> **Alemán:** Básico
+
+### Habilidades técnicas
+
+#### Data Science
+
+<i class="fa-brands fa-r-project" style="color: #1d4f67;"></i> `R`<br> 
+<i class="fa-solid fa-database" style="color: #1d4f67;"></i> `SQL` <br>
+<i class="fa-brands fa-python" style="color: #1d4f67;"></i> `Python` <br>
+
+#### Sistemas operativos
+
+<i class="fa-brands fa-ubuntu" style="color: #1d4f67;"></i> `Ubuntu` <br>
+<i class="fa-brands fa-windows" style="color: #1d4f67;"></i> `Windows` <br>
+
+#### Herramientas
+
+<i class="fas fa-code-branch" style="color: #1d4f67;"></i> `Git` <br>
+<i class="fab fa-github" style="color: #1d4f67;"></i> `GitHub` <br>
+<i class="fa-brands fa-docker" style="color: #1d4f67;"></i> `Docker` <br>
+<i class="fa-solid fa-font" style="color: #1d4f67;"></i> `LaTeX` <br>
+<i class="fa-brands fa-microsoft" style="color: #1d4f67;"></i> `Azure` <br>
+
+#### Frameworks
+
+<i class="fab fa-markdown" style="color: #1d4f67;"></i> `RMarkdown / Quarto`<br>
+<i class="fa-brands fa-r-project" style="color: #1d4f67;"></i> `Shiny` <br>
+<i class="fab fa-markdown" style="color: #1d4f67;"></i> `Markdown` <br>
+
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="67%"}
+
+
+# Michal Kinel
+
+```{r}
+#| include: false
+library(data.table)
+library(dplyr)
+
+cv_dt <- fread("mmk_cv_data.csv")
+
+
+# load libraries
+library(data.table)
+library(dplyr)
+
+col_br <- function(col){
+  dplyr::if_else(
+    !is.na(col) & col != "N/A|NA", 
+    paste0(col),
+    ""
+  )
+}
+
+col_br_loc <- function(col){
+  dplyr::if_else(
+    !is.na(col) & col != "N/A|NA", 
+    paste0('<span style="color: #1d4f67;"> <br><b><i>', col, " </i></b></span>"),
+    ""
+  )
+}
+
+col_br_title <- function(col){
+  dplyr::if_else(
+    !is.na(col) & col != "N/A|NA", 
+    paste0('<span style="color: #556a99; font-size: larger"><b>', col, " </b></span><br>"),
+    ""
+  )
+}
+
+create_section <- function(cv_data, section_name){
+  cv_data |>
+    dplyr::mutate(in_resume = as.character(in_resume),
+                  end = tidyr::replace_na(end, 9999),
+                  loc = dplyr::if_else(loc == "Online", NA_character_, loc)) |>
+    dplyr::filter(in_resume == TRUE, section == section_name) |>
+    dplyr::arrange(desc(end), desc(start)) |>
+    dplyr::mutate(
+      date =
+        dplyr::case_when(
+          end == 9999 ~ glue::glue("Actualidad <br> | <br> {start}"),
+          end != start ~ glue::glue("{end} <br> | <br> {start}"),
+          end == start ~ glue::glue("{end}"),
+          TRUE ~ ""
+        ) ,
+      .before = everything()
+    ) |>
+    dplyr::mutate(
+      main_text =
+        glue::glue(
+          "{col_br_title(title)} {col_br(institution)} {col_br(description_1)} {col_br_loc(loc)}"),
+      .after = date
+    ) |>
+    dplyr::select(c(date, main_text)) |>
+    gt::gt() |>
+    gt::fmt_markdown(columns = c(date, main_text)) |> 
+    gt::tab_options(column_labels.hidden = TRUE, table.width = gt::pct(100)) |> 
+    gt::cols_align(align = "left", columns = main_text) |> 
+    gt::cols_width(date ~ gt::pct(10))
+}
+
+```
+
+
+
+## <i class="fa-solid fa-suitcase"></i> Experiencia Laboral
+
+```{r}
+cv_dt %>% 
+  create_section("working_experience")
+
+```
+
+<br> 
+
+## <i class="fa-solid fa-graduation-cap"></i> Educación
+
+```{r}
+cv_dt %>% 
+  create_section("education")
+```
+
+
+
+## <i class="fa-solid fa-certificate"></i> Certificaciones y Cursos Adicionales
+
+```{r}
+cv_dt %>% 
+  create_section("certificates_courses")
+```
+
+
+## <i class="fa-solid fa-book"></i> Publicaciones
+
+```{r}
+cv_dt %>% 
+  create_section("publications")
+```
+
+
+:::
+:::
+
+
+
+```{=html}
+<script src="https://kit.fontawesome.com/1bb720cc6f.js" crossorigin="anonymous"></script>
+```

@@ -1,0 +1,166 @@
+/*-- scss:defaults --*/
+// quarto-scss-analysis-annotation { "origin": "journal (builtin theme)" }
+
+$theme: "journal" !default;
+
+
+//
+// Fonts
+// 
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+
+
+//
+// Color system
+//
+
+$white:    #fff !default;
+$gray-100: #f8f9fa !default;
+$gray-200: #eee !default;
+$gray-300: #dee2e6 !default;
+$gray-400: #ced4da !default;
+$gray-500: #aaa !default;
+$gray-600: #777 !default;
+$gray-700: #495057 !default;
+$gray-800: #333 !default;
+$gray-900: #222 !default;
+$black:    #000 !default;
+
+$blue:    #eb6864 !default;
+$indigo:  #6610f2 !default;
+$purple:  #6f42c1 !default;
+$pink:    #ffcf60 !default;
+$red:     #f57a00 !default;
+$orange:  #fd7e14 !default;
+$yellow:  #f5e625 !default;
+$green:   #22b24c !default;
+$teal:    #20c997 !default;
+$cyan:    #369 !default;
+
+$title1: #1d4f67;
+$title2: #556a99;
+$body: #080a0d;
+$accent: #ffcf60;
+
+$primary:       #1d4f67 !default;
+$secondary:     #556a99 !default;
+$success:       #1ca259 !default;
+$info:          #b3686d !default;
+$warning:       #e5c91d !default;
+$danger:        #f30d1a !default;
+$light:         #d2d4d2 !default;
+$dark:          #14114c !default;
+
+$min-contrast-ratio:   1.28 !default;
+
+// Fonts
+
+$h1-font-size:      3.4rem !default;
+$h1-font-family:   "Inter", sans-serif !default;
+$h1-font-weight:    900 !default;
+$h1-line-height:    1.8 !default;
+
+
+
+$headings-font-family:   "Roboto", sans-serif !default;
+$headings-font-weight:    700 !default;
+$headings-line-height:    1.2 !default;
+$headings-color:          $primary !default;
+
+$code-color:             $dark !default;
+$code-font-weight:       500 !default;
+$code-line-height:       1.2 !default;
+$code-bg:                $light !default;
+
+
+$body-font-family:       "Inter", sans-serif !default;
+$body-font-weight:       400 !default;
+$body-font-size:         1rem !default;
+$body-line-height:       1.6 !default;
+$body-color:             $body !default;
+
+$link-color:             $secondary !default;
+$link-decoration:        none !default;
+$link-shade-percentage:  null !default;
+$link-hover-color:       null !default;
+$link-hover-decoration:  none !default;
+
+
+// Buttons
+
+$input-btn-padding-x:         1rem !default;
+
+// Navbar
+
+// Pagination
+
+$pagination-hover-color:            $white !default;
+$pagination-hover-bg:               $primary !default;
+$pagination-hover-border-color:     $primary !default;
+
+
+
+/*-- scss:rules --*/
+
+
+// Variables
+
+$web-font-path: "https://fonts.googleapis.com/css2?family=News+Cycle:wght@400;700&display=swap" !default;
+@if $web-font-path {
+  @import url($web-font-path);
+}
+
+// Navbar
+
+.navbar {
+  font-family: $headings-font-family;
+  font-size: 18px;
+  font-weight: $headings-font-weight;
+}
+
+.navbar-brand {
+  padding-top: .5rem;
+  font-size: inherit;
+  font-weight: $headings-font-weight;
+  text-transform: uppercase;
+}
+
+// Buttons
+
+.btn {
+  font-family: $headings-font-family;
+  font-weight: $headings-font-weight;
+
+  &-secondary,
+  &-warning {
+    color: $white;
+  }
+}
+
+// Navs
+
+.pagination {
+  a:hover {
+    text-decoration: none;
+  }
+}
+
+h1 {
+  color:       $secondary;
+}
+
+
+h3 {
+  color:       $secondary;
+  font-size:      1.4rem;
+}
+
+h4 {
+  color:       $secondary;
+  font-size:   1.1rem;
+}
+
+// quarto-scss-analysis-annotation { "origin": null }
